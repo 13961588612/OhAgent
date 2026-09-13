@@ -1,0 +1,17 @@
+# 学习工程忽略规则
+__pycache__/
+*.py[cod]
+.venv/
+.uv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+dist/
+build/
+.openharness/
+.ohmo/
+*.log
+.env
+.env.*
+!.env.example
