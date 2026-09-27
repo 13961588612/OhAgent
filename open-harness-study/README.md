@@ -150,7 +150,7 @@ uv run pytest -q             # 建立测试基线（s20 深入）
 | 阶段 | 状态 | 完成日期 | 产出物 |
 |------|------|----------|--------|
 | s00 | ◐ | | `notes/s00-环境与源码地图.md` · `docs/05-environment-baseline.md` |
-| s01 | ☐ | | |
+| s01 | ◐ | | `notes/s01-配置系统与目录约定.md` · `stages/s01-config/RUNBOOK.md` |
 | s02 | ☐ | | |
 | s03 | ☐ | | |
 | s04 | ☐ | | |

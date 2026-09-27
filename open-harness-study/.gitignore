@@ -11,6 +11,8 @@ dist/
 build/
 .openharness/
 .ohmo/
+# capstone 实验区（含明文凭据与运行期数据，禁止提交）
+capstone/.local/
 *.log
 .env
 .env.*

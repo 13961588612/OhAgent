@@ -34,6 +34,8 @@
 
 ## 四、动手实验
 
+> **逐步执行手册：[`RUNBOOK.md`](RUNBOOK.md)** —— 15 个步骤，每个命令都给出完整格式、参数说明、预期输出、结果解读与对应知识点，按它从上到下执行即可。
+
 ```powershell
 uv run python -c "from openharness.config.settings import load_settings; print(load_settings().model_dump_json(indent=2))"
 uv run oh config show
@@ -45,6 +47,13 @@ uv run oh --dry-run            # 观察配置变化对结论的影响
 1. 用一张表列出 Settings 的**全部顶层字段**及默认值，并标注"企业环境必须调整"的项。
 2. 在项目级 `.openharness/` 下放一份技能，验证 `allow_project_skills=false` 时的行为差异。
 3. 故意写坏 `settings.json`（如非法 JSON、未知字段），观察报错与容错行为。
+
+实测修正（2026-09-16）：
+
+- `uv run oh config set permission.mode plan`（命令速览里的第一条写操作）在 v0.1.9 上会崩：`AttributeError: 'str' object has no attribute 'value'`。原因是 `_config_coerce_value` 只支持 bool/int/float/list 强转，枚举字段被赋成字符串后，`save_settings()` 里访问 `.value` 失败；文件不会被写坏。绕过方式见 RUNBOOK 步骤 7。
+- `uv run oh config show` 的脱敏规则包含裸词 `token` / `credential`，因此 `max_tokens`、`context_window_tokens`、`credential_slot` 会被一并打成 `[REDACTED]`；要看真实值改用 Python API（RUNBOOK 步骤 5）。
+- 技能数量与 **cwd** 有关：在快照目录是 10 个技能，在空项目目录只有 8 个。做配置漂移比对前先固定 `cwd`（RUNBOOK 步骤 10）。
+- 项目级 `.openharness/` 由 `get_project_config_dir()` 的 `mkdir` 副作用创建：在任意目录跑一次 `oh --dry-run`，就会生成 `.openharness/autopilot` 与 `.openharness/plugins`（RUNBOOK 步骤 9）。
 
 ## 五、验收标准
 
