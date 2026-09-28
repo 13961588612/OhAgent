@@ -11,27 +11,27 @@
 ### 0.1 打开工作目录
 
 ```powershell
-cd C:\code\OhAgent\.refs\OpenHarness
+cd D:\code\OhAgent\.refs\OpenHarness
 ```
 
 【目的】所有实验都在上游快照内执行，保证每个结论都能指到"文件 + 符号"。
 【参数说明】`.refs\OpenHarness` 是只读的上游源码快照，不要在这里写作业、不要 `git commit`。
-【预期输出】PowerShell 提示符前的路径变成 `C:\code\OhAgent\.refs\OpenHarness`。用 `Get-Location` 确认。
+【预期输出】PowerShell 提示符前的路径变成 `D:\code\OhAgent\.refs\OpenHarness`。用 `Get-Location` 确认。
 【结果解读】学习工程（`open-harness-study\`）与源码快照（`.refs\OpenHarness`）刻意分离：快照可以随时按 commit 重建，你的产出独立于快照存在。
 【学到的知识】为什么要有源码快照？因为"源码为准"的学习规则要求所有结论可复现；如果直接在会变动的分支上学习，半年后你的笔记就对不上了。
 
 ### 0.2 隔离实验环境（推荐）
 
 ```powershell
-$env:OPENHARNESS_CONFIG_DIR = "C:\code\OhAgent\open-harness-study\capstone\.local\config"
-$env:OPENHARNESS_DATA_DIR   = "C:\code\OhAgent\open-harness-study\capstone\.local\data"
-$env:OPENHARNESS_LOGS_DIR   = "C:\code\OhAgent\open-harness-study\capstone\.local\logs"
+$env:OPENHARNESS_CONFIG_DIR = "D:\code\OhAgent\open-harness-study\capstone\.local\config"
+$env:OPENHARNESS_DATA_DIR   = "D:\code\OhAgent\open-harness-study\capstone\.local\data"
+$env:OPENHARNESS_LOGS_DIR   = "D:\code\OhAgent\open-harness-study\capstone\.local\logs"
 ```
 
 【目的】把 oh 的配置、数据、日志重定向到学习工程目录，避免污染你日常的 `~/.openharness`。
 【参数说明】
 
-- `OPENHARNESS_CONFIG_DIR`：配置目录，默认 `C:\Users\Administrator\.openharness`，里面是 `settings.json`。
+- `OPENHARNESS_CONFIG_DIR`：配置目录，默认 `C:\Users\13961\.openharness`，里面是 `settings.json`。
 - `OPENHARNESS_DATA_DIR`：数据目录，放会话、任务、cron 记录。
 - `OPENHARNESS_LOGS_DIR`：日志目录，`oh cron logs` 读的就是这里。
 【预期输出】三条命令都不产生输出。用下面这行确认：
@@ -142,7 +142,7 @@ uv run oh --help
 
 ### 3.1 分组用法手册（逐组示例）
 
-> 以下命令均在 `C:\code\OhAgent\.refs\OpenHarness` 下用 `uv run` 执行。
+> 以下命令均在 `D:\code\OhAgent\.refs\OpenHarness` 下用 `uv run` 执行。
 
 【分组是怎么来的】这 8 个分组不是 Typer 自动生成的，而是 `cli.py` 里每个选项显式声明的 `rich_help_panel="..."`（如 `cli.py:2193` 的 `rich_help_panel="Session"`）聚合而成；最后的 `Commands` 分组来自 `cli.py:751-775` 的 `app.add_typer(...)`。所以**分组 = 代码里声明的能力域**，读分组等价于读代码结构。
 
@@ -294,7 +294,7 @@ uv run oh cron toggle <name> false
 uv run oh cron start
 
 uv run oh autopilot status
-uv run oh autopilot add "补齐 s00 笔记" --body "整理 CLI 分组" --cwd C:\code\OhAgent\.refs\OpenHarness
+uv run oh autopilot add "补齐 s00 笔记" --body "整理 CLI 分组" --cwd D:\code\OhAgent\.refs\OpenHarness
 uv run oh autopilot scan
 uv run oh autopilot tick
 uv run oh autopilot run-next
@@ -306,7 +306,7 @@ uv run oh autopilot export-dashboard
 ### 3.3 一步不落的执行序列
 
 ```powershell
-cd C:\code\OhAgent\.refs\OpenHarness
+cd D:\code\OhAgent\.refs\OpenHarness
 uv sync --extra dev                              # 1. 建环境
 uv run oh --version                              # 2. 确认版本 0.1.9
 uv run oh --help                                 # 3. 对照 3.1 的 8 个分组
@@ -556,7 +556,7 @@ Readiness
   - Run `oh auth login` or configure the active profile credentials before executing.
 
 Execution
-- cwd: C:\code\OhAgent\.refs\OpenHarness
+- cwd: D:\code\OhAgent\.refs\OpenHarness
 - prompt: (none)
 - entrypoint: interactive_session
 - detail: OpenHarness would start and wait for user input. No model or tool call happens until you submit one.
@@ -658,8 +658,8 @@ uv run oh --dry-run -p "hello" --output-format json
 ```json
 {
   "mode": "dry-run",
-  "cwd": "C:\\code\\OhAgent\\.refs\\OpenHarness",
-  "config_path": "C:\\Users\\Administrator\\.openharness\\settings.json",
+  "cwd": "D:\\code\\OhAgent\\.refs\\OpenHarness",
+  "config_path": "C:\\Users\\13961\\.openharness\\settings.json",
   "prompt": "hello",
   "prompt_preview": "hello",
   "settings": {

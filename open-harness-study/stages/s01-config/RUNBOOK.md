@@ -12,21 +12,21 @@
 ### 0.1 打开工作目录
 
 ```powershell
-cd C:\code\OhAgent\.refs\OpenHarness
+cd D:\code\OhAgent\.refs\OpenHarness
 ```
 
 【目的】本阶段所有命令都在上游快照内执行，保证"默认值""文件行号"都能对上源码。
 【参数说明】`.refs\OpenHarness` 是只读快照，不要在这里写作业、不要 `git commit`。
-【预期输出】提示符前路径变成 `C:\code\OhAgent\.refs\OpenHarness`。
+【预期输出】提示符前路径变成 `D:\code\OhAgent\.refs\OpenHarness`。
 【结果解读】s01 的主题是"配置"，而配置的**默认值全部来自源码**；快照一旦被改动，"默认值"就不再是上游的默认值。
 【学到的知识】配置系统的第一性原理：任何配置项都要有一个"权威默认值"的出处。源码就是这里的权威。
 
 ### 0.2 隔离实验环境（本阶段必须做）
 
 ```powershell
-$env:OPENHARNESS_CONFIG_DIR = "C:\code\OhAgent\open-harness-study\capstone\.local\config"
-$env:OPENHARNESS_DATA_DIR   = "C:\code\OhAgent\open-harness-study\capstone\.local\data"
-$env:OPENHARNESS_LOGS_DIR   = "C:\code\OhAgent\open-harness-study\capstone\.local\logs"
+$env:OPENHARNESS_CONFIG_DIR = "D:\code\OhAgent\open-harness-study\capstone\.local\config"
+$env:OPENHARNESS_DATA_DIR   = "D:\code\OhAgent\open-harness-study\capstone\.local\data"
+$env:OPENHARNESS_LOGS_DIR   = "D:\code\OhAgent\open-harness-study\capstone\.local\logs"
 ```
 
 【目的】s00 做隔离是"推荐"，s01 是"必须"：本阶段会**真的写** `settings.json`，不隔离就会改到你日常的 `~/.openharness`。
@@ -329,10 +329,10 @@ elif not profile_has_explicit_model:
 ## 步骤 9 · 项目级 `.openharness/` 与作用域
 
 ```powershell
-$proj = "C:\code\OhAgent\open-harness-study\capstone\.local\s01-lab\project"
+$proj = "D:\code\OhAgent\open-harness-study\capstone\.local\s01-lab\project"
 New-Item -ItemType Directory -Force -Path $proj | Out-Null
 cd $proj
-uv run --project C:\code\OhAgent\.refs\OpenHarness oh --dry-run
+uv run --project D:\code\OhAgent\.refs\OpenHarness oh --dry-run
 Get-ChildItem $proj -Force -Recurse | Select-Object FullName
 ```
 
@@ -377,13 +377,13 @@ description: s01 实验用技能
 
 # 2) 默认开关下看技能清单
 cd $proj
-uv run --project C:\code\OhAgent\.refs\OpenHarness oh --dry-run
+uv run --project D:\code\OhAgent\.refs\OpenHarness oh --dry-run
 
 # 3) 关掉项目技能，再看一次
-cd C:\code\OhAgent\.refs\OpenHarness
+cd D:\code\OhAgent\.refs\OpenHarness
 uv run oh config set allow_project_skills false
 cd $proj
-uv run --project C:\code\OhAgent\.refs\OpenHarness oh --dry-run
+uv run --project D:\code\OhAgent\.refs\OpenHarness oh --dry-run
 uv run oh config set allow_project_skills true     # 记得还原
 ```
 
@@ -407,7 +407,7 @@ uv run oh config set allow_project_skills true     # 记得还原
 > 用**实验目录**做，别拿真实配置试：`$lab = "$env:OPENHARNESS_CONFIG_DIR\..\s01-lab\config"`，并在每次测试前把 `$env:OPENHARNESS_CONFIG_DIR` 指过去。
 
 ```powershell
-$lab = "C:\code\OhAgent\open-harness-study\capstone\.local\s01-lab\config"
+$lab = "D:\code\OhAgent\open-harness-study\capstone\.local\s01-lab\config"
 New-Item -ItemType Directory -Force -Path $lab | Out-Null
 $env:OPENHARNESS_CONFIG_DIR = $lab
 $enc = New-Object System.Text.UTF8Encoding($false)
@@ -579,7 +579,7 @@ for name, field in Settings.model_fields.items():
 ## 附录 B · 常见问题
 
 **Q1：`git` 报 `detected dubious ownership`？**
-快照目录的属主与当前用户不一致（换用户/换机器后常见）。按提示执行 `git config --global --add safe.directory C:/code/OhAgent/.refs/OpenHarness`，或临时用 `git -c safe.directory='*' -C <路径> ...`。
+快照目录的属主与当前用户不一致（换用户/换机器后常见）。按提示执行 `git config --global --add safe.directory D:/code/OhAgent/.refs/OpenHarness`，或临时用 `git -c safe.directory='*' -C <路径> ...`。
 
 **Q2：`oh config set permission.mode plan` 崩了，是环境坏了吗？**
 不是。是上游缺陷（步骤 7），`AttributeError: 'str' object has no attribute 'value'`。文件不会被写坏，按步骤 7 的绕过方案操作。

@@ -65,9 +65,9 @@ uv run pytest -q -p no:cacheprovider --ignore=tests/test_mcp/test_http_flow.py
 ## 五、实验环境隔离约定
 
 ```powershell
-$env:OPENHARNESS_CONFIG_DIR = "C:\code\OhAgent\open-harness-study\capstone\.local\config"
-$env:OPENHARNESS_DATA_DIR   = "C:\code\OhAgent\open-harness-study\capstone\.local\data"
-$env:OPENHARNESS_LOGS_DIR   = "C:\code\OhAgent\open-harness-study\capstone\.local\logs"
+$env:OPENHARNESS_CONFIG_DIR = "D:\code\OhAgent\open-harness-study\capstone\.local\config"
+$env:OPENHARNESS_DATA_DIR   = "D:\code\OhAgent\open-harness-study\capstone\.local\data"
+$env:OPENHARNESS_LOGS_DIR   = "D:\code\OhAgent\open-harness-study\capstone\.local\logs"
 ```
 
 依据：`src/openharness/config/paths.py`（第 19 / 41 / 58 行附近）中三个环境变量优先级最高。

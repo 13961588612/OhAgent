@@ -2,7 +2,7 @@
 
 > **上游基准**：`HKUDS/OpenHarness` · commit `9b2efd7` · v0.1.9 · MIT
 > **核心源码**：`src/openharness` 约 **39,300 行 Python**，外加 `ohmo/`（个人智能体）、`frontend/terminal/`（React 终端）、`autopilot-dashboard/`（Vite 看板）、`tests/`（约 100 个测试模块）
-> **本地只读源码快照**：`C:\code\OhAgent\.refs\OpenHarness`
+> **本地只读源码快照**：`D:\code\OhAgent\.refs\OpenHarness`
 
 本目录不是"教程摘抄"，而是**源码驱动的研习工程**：每一阶段都要求"读懂源码 → 跑通实验 → 产出企业化成果"。
 
@@ -121,7 +121,7 @@ open-harness-study/
 
 ```powershell
 # 1) 进入上游源码快照，建立可运行环境
-cd C:\code\OhAgent\.refs\OpenHarness
+cd D:\code\OhAgent\.refs\OpenHarness
 uv sync --extra dev          # 安装核心 + 开发依赖
 uv run oh --help             # 验证 CLI
 uv run pytest -q             # 建立测试基线（s20 深入）

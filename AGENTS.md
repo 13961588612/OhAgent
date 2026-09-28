@@ -12,7 +12,7 @@
 
 ## 构建、测试与开发命令
 
-除注明外，均在 `C:\code\OhAgent\.refs\OpenHarness` 下执行：
+除注明外，均在 `D:\code\OhAgent\.refs\OpenHarness` 下执行：
 
 - `uv sync --extra dev`：创建/同步 `.venv` 并安装 dev 依赖。
 - `uv run oh --help`、`uv run oh --version`：验证 CLI 与版本。
@@ -34,7 +34,7 @@
 
 ## 提交与 PR 指南
 
-- 本工作区自身不是 git 仓库；唯一仓库是只读快照 `.refs/OpenHarness`，禁止在其中提交改动。
+- 本工作区是 git 仓库（`master`），作业与笔记提交在这里；`.refs/OpenHarness` 是只读快照，禁止在其中提交改动。
 - 上游使用 Conventional Commits，如 `fix(config): preserve profile auth when overriding model`；提 PR 用 `<type>(<scope>): <描述>`。
 - PR 要求：范围小而聚焦；说明问题、改动与验证方式；行为变更补测试；CLI 变更同步更新文档与 `CHANGELOG.md` 的 `Unreleased`。
 

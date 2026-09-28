@@ -32,7 +32,7 @@
 命令速览：
 
 ```powershell
-cd C:\code\OhAgent\.refs\OpenHarness
+cd D:\code\OhAgent\.refs\OpenHarness
 uv sync --extra dev
 uv run oh --help                      # 把 help 输出归档到 notes/
 uv run oh --dry-run                   # 观察 readiness 与 next actions

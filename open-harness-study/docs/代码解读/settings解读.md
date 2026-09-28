@@ -1,6 +1,6 @@
 # Settings.py 代码解读
 
-- 源文件：`C:\code\OhAgent\.refs\OpenHarness\src\openharness\config\settings.py`
+- 源文件：`D:\code\OhAgent\.refs\OpenHarness\src\openharness\config\settings.py`
 - 上游快照：v0.1.9 / `9b2efd7`
 - 文件规模：1104 行
 
